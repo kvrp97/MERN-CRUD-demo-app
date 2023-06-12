@@ -9,7 +9,7 @@ export default class Home extends Component {
         this.state = {
             posts: [],
         }
-    }    
+    }
 
     componentDidMount() {
         this.retrievePosts();
@@ -44,10 +44,10 @@ export default class Home extends Component {
                     <tbody>
                         {
                             this.state.posts?.map((post, index) => (
-                                <tr>
+                                <tr key={index}>
                                     <th>{index + 1}</th>
                                     <td>
-                                        <a href={`/post/${post._id}`} style={{ textDecoration:'none' }}>{post.topic}</a>                                        
+                                        <a href={`/post/${post._id}`} style={{ textDecoration: 'none' }}>{post.topic}</a>
                                     </td>
                                     <td>{post.description}</td>
                                     <td>{post.postCategory}</td>
@@ -64,7 +64,7 @@ export default class Home extends Component {
                         }
                     </tbody>
                 </Table>
-                <Button variant="success"><a href='/add' style={{ textDecoration:'none', color:'white' }}>Create New Post</a></Button>{' '}
+                <Button variant="success"><a href='/add' style={{ textDecoration: 'none', color: 'white' }}>Create New Post</a></Button>{' '}
             </div>
         )
     }
