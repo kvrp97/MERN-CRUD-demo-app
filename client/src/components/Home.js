@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Swal from 'sweetalert2'
 
 export default class Home extends Component {
     constructor(props) {
@@ -28,10 +29,28 @@ export default class Home extends Component {
     }
 
     onDelete = (id) => {
-        axios.delete(`/post/delete/${id}`).then(() => {
-            this.retrievePosts();
-            alert("Post deleted successfully");
-        });
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/post/delete/${id}`).then(() => {
+                    this.retrievePosts();
+                    Swal.fire(
+                        'Deleted!',
+                        'Your post has been deleted.',
+                        'success'
+                    )
+                });
+            }
+        })
+
     }
 
     render() {
