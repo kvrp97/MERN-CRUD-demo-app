@@ -52,7 +52,7 @@ export default class Home extends Component {
                                     <td>{post.description}</td>
                                     <td>{post.postCategory}</td>
                                     <td>
-                                        <Button variant="warning">
+                                        <Button variant="warning" href={`/edit/${post._id}`}>
                                             <i className="fas fa-edit"></i>&nbsp;Edit
                                         </Button>{'  '}
                                         <Button variant="danger">

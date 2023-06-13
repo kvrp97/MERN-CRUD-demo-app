@@ -44,7 +44,8 @@ router.put('/post/update/:id', (req, res) => {
         }
     ).then(() => {
         return res.status(200).json({
-            success: "Updated successfully",
+            success: true,
+            message: "Updated successfully"
         });
     })
         .catch(err => {
