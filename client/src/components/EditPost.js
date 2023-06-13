@@ -36,8 +36,6 @@ export default class EditPost extends Component {
       postCategory: postCategory
     }
 
-    console.log(data);
-
     axios.put(`/post/update/${id}`, data).then((res) => {
       if (res.data.success) {
         Swal.fire(
