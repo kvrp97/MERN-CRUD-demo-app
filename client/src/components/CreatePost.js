@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default class CreatePost extends Component {
 
@@ -36,8 +37,7 @@ export default class CreatePost extends Component {
 
     console.log(data);
 
-    axios.post("/post/save", data).then((res) => {
-      console.log(res);
+    axios.post("/post/save", data).then((res) => {      
       if (res.data.success) {
         this.setState(
           {
@@ -46,6 +46,13 @@ export default class CreatePost extends Component {
             postCategory: ""
           }
         )
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your post has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     });
   }
