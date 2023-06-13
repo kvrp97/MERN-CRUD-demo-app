@@ -35,8 +35,6 @@ export default class CreatePost extends Component {
       postCategory: postCategory
     }
 
-    console.log(data);
-
     axios.post("/post/save", data).then((res) => {      
       if (res.data.success) {
         this.setState(
