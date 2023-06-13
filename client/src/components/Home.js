@@ -26,8 +26,6 @@ export default class Home extends Component {
                 this.setState({
                     posts: response.data.existingPosts
                 })
-
-                console.log(this.state.posts);
             }
         })
     }
