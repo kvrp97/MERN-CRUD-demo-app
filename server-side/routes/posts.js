@@ -8,7 +8,8 @@ router.post('/post/save', (req, res) => {
     newPost.save()
         .then(() => {
             return res.status(200).json({
-                success: "Post saved successfully"
+                success: true,
+                message: "Post saved successfully"
             })
         })
         .catch(err => {
