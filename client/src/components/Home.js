@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2'
 
@@ -53,10 +57,43 @@ export default class Home extends Component {
 
     }
 
+    filterData(posts, searchKey) {
+        const result = posts.filter((post) => (
+            post.topic.toLowerCase().includes(searchKey) ||
+            post.description.toLowerCase().includes(searchKey) ||
+            post.postCategory.toLowerCase().includes(searchKey)
+        ))
+        this.setState({ posts: result })
+    }
+
+    handleSearch = (e) => {
+        e.preventDefault();
+        const searchKey = e.currentTarget.value;
+
+        axios.get("/posts").then((response) => {
+            if (response.data.success) {
+                this.filterData(response.data.existingPosts, searchKey);
+            }
+        })
+    }
+
     render() {
         return (
-            <div className='container'>
-                <p>All Posts</p>
+            <Container>
+                <Row className="mt-4 mb-4">
+                    <Col>
+                        <h4>All Posts</h4>
+                    </Col>
+                    <Col lg="4">
+                        <Form.Control
+                            name="search"
+                            type="search"
+                            placeholder="Search"
+                            onChange={this.handleSearch}
+                        />
+                    </Col>
+                </Row>
+                <hr />
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -91,7 +128,7 @@ export default class Home extends Component {
                     </tbody>
                 </Table>
                 <Button variant="success"><a href='/add' style={{ textDecoration: 'none', color: 'white' }}>Create New Post</a></Button>{' '}
-            </div>
+            </Container>
         )
     }
 }
