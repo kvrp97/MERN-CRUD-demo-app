@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default class EditPost extends Component {
 
@@ -38,9 +39,12 @@ export default class EditPost extends Component {
     console.log(data);
 
     axios.put(`/post/update/${id}`, data).then((res) => {
-      console.log(res);
       if (res.data.success) {
-        alert("Post updated successfully");
+        Swal.fire(
+          'Updated!',
+          'Post updated successfully',
+          'success'
+        )
       }
     });
   }
